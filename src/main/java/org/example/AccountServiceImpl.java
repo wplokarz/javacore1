@@ -2,28 +2,6 @@ package org.example;
 
 
 public class AccountServiceImpl implements AccountService{
-    Object[] accounts;
-    public AccountServiceImpl(Account[] accounts) {
-        this.accounts = accounts;
-    }
-    public Account findAccountByOwnerId(long id) {
-        for (Object account : this.accounts) {
-            Account current = (Account) account;
-            if (current.getId() == id) {
-                return current;
-            }
-        }
-        return null;
-    }
-    public long countAccountsWithBalanceGreaterThan(long value) {
-        long numberOfAccounts = 0;
-        for (Object account : this.accounts) {
-            if (((Account) account).getBalance() > value) {
-                numberOfAccounts += 1;
-            }
-        }
-        return numberOfAccounts;
-    }
 
     public static void main(String[] args) {
         User firstUser = new User(1, "James", "Smith");
@@ -36,5 +14,30 @@ public class AccountServiceImpl implements AccountService{
         AccountService service = new AccountServiceImpl(accounts);
         System.out.println(service.findAccountByOwnerId(2));
         System.out.println(service.countAccountsWithBalanceGreaterThan(2000));
+    }
+
+    Object[] accounts;
+    public AccountServiceImpl(Account[] accounts) {
+        this.accounts = accounts;
+    }
+    // return account object for given id or return null if not exist
+    public Account findAccountByOwnerId(long id) {
+        for (Object account : this.accounts) {
+            Account current = (Account) account;
+            if (current.getId() == id) {
+                return current;
+            }
+        }
+        return null;
+    }
+    // return number of accounts with balance greater than provided value
+    public long countAccountsWithBalanceGreaterThan(long value) {
+        long numberOfAccounts = 0;
+        for (Object account : this.accounts) {
+            if (((Account) account).getBalance() > value) {
+                numberOfAccounts += 1;
+            }
+        }
+        return numberOfAccounts;
     }
 }
